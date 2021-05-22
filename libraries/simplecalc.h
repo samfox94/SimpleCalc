@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include <string.h>
-#include <stdbool.h> 
+#include <stdbool.h>
 
 //Usage Manual
 void display_manual();
@@ -25,7 +25,8 @@ int rotate_left(char*, char*);
 int rotate_right(char*, char*);
 
 //Input Validation
-bool validate_format(int);
+bool validate_format(int, char*);
+bool is_supported_operator(char*);
 bool validate_simplecalc_inputs(int, char *[]);
 
 //Terminal Interation

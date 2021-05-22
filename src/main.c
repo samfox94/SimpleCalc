@@ -1,9 +1,10 @@
-#include "../hdrs/simplecalc.h"
+#include <simplecalc.h>
 
-int main(int argc,  char *argv[])
+int main(int input_string_count,  char *input_strings[])
 {
-    if(validate_simplecalc_inputs(argc, argv)){
-        simplecalc_print_answer_to_stdout(argv);
+    
+    if(validate_simplecalc_inputs(input_string_count, input_strings)){
+        simplecalc_print_answer_to_stdout(input_strings);
     }
 
     return 0;
