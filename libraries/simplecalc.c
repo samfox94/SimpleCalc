@@ -15,7 +15,7 @@ void display_manual(){
     printf("\t\"-\"\t\tSubtraction, \t\t\tFormat: [DOUBLE] - [DOUBLE]\n");
     printf("\t\"*\"\t\tMultiplication, \t\tFormat: [DOUBLE] * [DOUBLE]\n");
     printf("\t\"/\"\t\tDivision, \t\t\tFormat: [DOUBLE] / [DOUBLE]\n");
-    printf("\t\"%%\"\t\tModulus/Remainder, \t\tFormat: [DOUBLE] %% [DOUBLE]\n");
+    printf("\t\"%%\"\t\tModulus/Remainder, \t\tFormat: [INTEGER] %% [INTEGER]\n");
     printf("\t\"lshift\"\tBitwise Shift Left, \t\tFormat: [INTEGER--decimal format of number being shifted] lshift [INTEGER--number of bits to shift]\n");
     printf("\t\"rshift\"\tBitwise Shift Right, \t\tFormat: [INTEGER--decimal format of number being shifted] rshift [INTEGER--number of bits to shift]\n");
     printf("\t\"and\"\t\tBitwise AND, \t\t\tFormat: [INTEGER] AND [INTEGER]\n");
@@ -27,57 +27,57 @@ void display_manual(){
 
 //Operator Functions
 double add(char *operand1, char *operand2){
-    return atof(operand1) + atof(operand2);
+    return strtof(operand1, NULL) + strtof(operand2, NULL);
 }
 
 double subtract(char *operand1, char *operand2){
-    return atof(operand1) - atof(operand2);
+    return strtof(operand1, NULL) - strtof(operand2, NULL);
 }
 
 double multiply(char *operand1, char *operand2){
-    return atof(operand1) * atof(operand2);
+    return strtof(operand1, NULL) * strtof(operand2, NULL);
 }
 
 double divide(char *operand1, char *operand2){
-    if(atof(operand2) == 0){
+    if(strtof(operand2, NULL) == 0){
         printf("\nDivision Error: cannot divide by ");
         return 0;
     }else{
         
-        return atof(operand1) / atof(operand2);
+        return strtof(operand1, NULL) / strtof(operand2, NULL);
     }
 }
 
 double modulo(char *operand1, char *operand2){
-    return atoi(operand1) % atoi(operand2);
+    return strtol(operand1, NULL, 10) % strtol(operand2, NULL, 10);
 }
 
 int left_shift(char *operand1, char *operand2){
-    return atoi(operand1) << atoi(operand2);
+    return strtol(operand1, NULL, 10) << strtol(operand2, NULL, 10);
 }
 
 int right_shift(char *operand1, char *operand2){
-    return atoi(operand1) >> atoi(operand2);
+    return strtol(operand1, NULL, 10) >> strtol(operand2, NULL, 10);
 }
 
 int and(char *operand1, char *operand2){
-    return atoi(operand1) & atoi(operand2);
+    return strtol(operand1, NULL, 10) & strtol(operand2, NULL, 10);
 }
 
 int or(char *operand1, char *operand2){
-    return atoi(operand1) | atoi(operand2);
+    return strtol(operand1, NULL, 10) | strtol(operand2, NULL, 10);
 }
 
 int xor(char *operand1, char *operand2){
-    return atoi(operand1) ^ atoi(operand2);
+    return strtol(operand1, NULL, 10) ^ strtol(operand2, NULL, 10);
 }
 
 int rotate_left(char *operand1, char *operand2){
-    return (atoi(operand1) << atoi(operand2)) | (atoi(operand1) >> (sizeof(operand1) * 8 - atoi(operand2)));
+    return (strtol(operand1, NULL, 10) << strtol(operand2, NULL, 10)) | (strtol(operand1, NULL, 10) >> (sizeof(operand1) * 8 - strtol(operand2, NULL, 10)));
 }
 
 int rotate_right(char *operand1, char *operand2){
-    return (atoi(operand1) >> atoi(operand2)) | (atoi(operand1) << (sizeof(operand1) * 8 - atoi(operand2)));
+    return (strtol(operand1, NULL, 10) >> strtol(operand2, NULL, 10)) | (strtol(operand1, NULL, 10) << (sizeof(operand1) * 8 - strtol(operand2, NULL, 10)));
 }
 
 //Input Validation
