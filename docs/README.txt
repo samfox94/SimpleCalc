@@ -7,7 +7,7 @@ Valid Operators:
         "-"             Subtraction,                    Format: [DOUBLE] - [DOUBLE]
         "*"             Multiplication,                 Format: [DOUBLE] * [DOUBLE]
         "/"             Division,                       Format: [DOUBLE] / [DOUBLE]
-        "%"             Modulus/Remainder,              Format: [DOUBLE] % [DOUBLE]
+        "%"             Modulus/Remainder,              Format: [INTEGER] % [INTEGER]
         "lshift"        Bitwise Shift Left,             Format: [INTEGER--decimal format of number being shifted] lshift [INTEGER--number of bits to shift]
         "rshift"        Bitwise Shift Right,            Format: [INTEGER--decimal format of number being shifted] rshift [INTEGER--number of bits to shift]
         "and"           Bitwise AND,                    Format: [INTEGER] AND [INTEGER]
