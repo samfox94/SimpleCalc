@@ -81,12 +81,61 @@ int rotate_right(char *operand1, char *operand2){
 }
 
 //Input Validation
-bool validate_format(int num_args, char *operator_string){
-    if(num_args == 4 && is_supported_operator(operator_string)){
+bool validate_format(int num_args, char *input_strings[]){
+    if(num_args == 4 && is_supported_operator(input_strings[2]) && validate_operand_type(input_strings)){
         return true;
     }else{
         return false;
     }
+}
+
+bool validate_operand_type(char *input_strings[]){
+    char *next_char_ptr;
+
+    for(int i = 1; i <= 3; i+=2){
+
+        if((strcmp(input_strings[i], "0") != 0)){
+        
+            if( (strcmp("+", input_strings[2]) == 0) || 
+                (strcmp("-", input_strings[2]) == 0) || 
+                (strcmp("*", input_strings[2]) == 0) || 
+                (strcmp("/", input_strings[2]) == 0)){
+
+                    double operator_d = strtod(input_strings[i], &next_char_ptr);
+
+                    if(operator_d == 0 || (strcmp(next_char_ptr, "\0") != 0)){
+                                            
+                        printf("Error: Equation unsupported as input. \"%s\" unsupported as operand.\n", input_strings[i]);
+                        printf("%s operator accepts operands of type DOUBLE\n", input_strings[2]);
+                        printf("See usage manual below for supported operators and format\n\n", input_strings[2]);
+
+                        return false;
+                    }
+
+            }else if((strcmp("%", input_strings[2]) == 0) || 
+                    (strcmp("lshift", input_strings[2]) == 0) || 
+                    (strcmp("rshift", input_strings[2]) == 0) || 
+                    (strcmp("and", input_strings[2]) == 0) ||
+                    (strcmp("or", input_strings[2]) == 0) ||
+                    (strcmp("xor", input_strings[2]) == 0) ||
+                    (strcmp("rotl", input_strings[2]) == 0) ||
+                    (strcmp("rotr", input_strings[2]) == 0)){
+
+                        long operator_l = strtol(input_strings[i], &next_char_ptr, 10);
+
+                        if((strtol(input_strings[i], &next_char_ptr, 10) == 0) || strcmp(next_char_ptr, "\0") != 0){
+                        
+                            printf("Error: Equation unsupported as input. \"%s\" unsupported as operand.\n", input_strings[i]);
+                            printf("%s operator accepts operands of type INTEGER\n", input_strings[2]);
+                            printf("See usage manual below for supported operators and format\n\n", input_strings[2]);
+
+                            return false;
+                        }
+            }
+        }
+    }  
+
+    return true;
 }
 
 bool is_supported_operator(char *operator_string){
@@ -100,7 +149,7 @@ bool is_supported_operator(char *operator_string){
 }
 
 bool validate_simplecalc_inputs(int input_string_count, char *input_strings[]){
-    if(validate_format(input_string_count, input_strings[2])){
+    if(validate_format(input_string_count, input_strings)){
         return true;
     }else{
         display_manual();
@@ -162,7 +211,7 @@ void simplecalc_print_answer_to_stdout(char *input_strings[]){
         
         printf("Operator type \"%s\" unsupported. \n", input_strings[2]);
         printf("Please use one of the following supported operators:\n");
-        printf("+, -, *, /, %%, lshift, rshift, and, or, xor, rotl, rotr");
+        printf("+, -, *, /, %%, lshift, rshift, and, or, xor, rotl, rotr\n");
     
     }
 }

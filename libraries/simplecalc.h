@@ -25,7 +25,8 @@ int rotate_left(char*, char*);
 int rotate_right(char*, char*);
 
 //Input Validation
-bool validate_format(int, char*);
+bool validate_format(int, char*[]);
+bool validate_operand_type(char *[]);
 bool is_supported_operator(char*);
 bool validate_simplecalc_inputs(int, char *[]);
 
